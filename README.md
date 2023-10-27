@@ -140,9 +140,14 @@ If the `tactors` field specifies values that are contradicted by values in the `
 
 __Example Usage:__
 
-This message will inflate the tactors on the Right Hand First Finger to 0.4\*MAX_INFLATION, the tactors on the Right Hand Middle Finger to 0.67\*MAX_INFLATION, etc.
+This message will:
+- Activate the finger breaks on the Right Hand First Finger and Right Hand Middle Finger, and deactivate the finger break on the Left Hand Thumb
+- Inflate the tactors on the Left Hand Ring Finger to 0.81\*MAX_INFLATION and the tactors on the Left Hand Little Finger to 0.12\*MAX_INFLATION
 ```
-msg = TactorGroupState()
-msg.tactor_group = ['rh_ff', 'rh_mf', 'lh_th']
-msg.inflation = [0.4, 0.67, 0.0]
+msg = FullHandState()
+msg.breaks.name = ['rh_ff', 'rh_mf', 'lh_th']
+msg.breaks.activated = [True, True, False]
+
+msg.tactor_groups.tactor_group = ['lh_rf', 'lh_lf']
+msg.tactor_groups.inflation = [0.81, 0.12]
 ```
