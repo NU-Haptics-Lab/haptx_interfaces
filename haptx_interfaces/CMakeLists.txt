@@ -7,6 +7,8 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(tf2_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
@@ -14,6 +16,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/FullHandState.msg"
   "msg/TactorGroupState.msg"
   "msg/TactorState.msg"
+  DEPENDENCIES sensor_msgs tf2_msgs
 )
 
 if(BUILD_TESTING)
