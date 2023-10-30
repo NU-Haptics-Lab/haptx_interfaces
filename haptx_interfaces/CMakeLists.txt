@@ -14,6 +14,7 @@ find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/FingerBrakeState.msg"
   "msg/FullHandState.msg"
+  "msg/HaptxState.msg"
   "msg/TactorGroupState.msg"
   "msg/TactorState.msg"
   DEPENDENCIES sensor_msgs tf2_msgs
