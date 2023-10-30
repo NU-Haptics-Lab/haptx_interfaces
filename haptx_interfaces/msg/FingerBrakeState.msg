@@ -1,12 +1,12 @@
-# This is a message that holds data to describe the state of the finger breaks 
+# This is a message that holds data to describe the state of the finger brakes 
 #
-# The state of each finger break is defined by:
-#  * a boolean indicating whether the break is activated (True or False)
+# The state of each finger brake is defined by:
+#  * a boolean indicating whether the brake is activated (True or False)
 #
-# Each finger break is uniquely identified by its name
+# Each finger brake is uniquely identified by its name
 #
 # All arrays in this message should have the same size.
-# This is the only way to uniquely associate the finger break name with the
+# This is the only way to uniquely associate the finger brake name with the
 # correct activation states.
 
 string[] name
