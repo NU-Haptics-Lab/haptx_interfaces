@@ -2,23 +2,31 @@
 
 These messages can be used to actuate the HaptX Gloves.
 
-There are 4 types of messages:
-- `FingerBreakState`: This message can be used to activate/deactivate the finger breaks of the HaptX Glove
-- `TactorState`: This message can be used to inflate/deflate individual tactors
-- `TactorGroupState`: This message can be used to inflate/deflate predefined groups of tactors
-- `FullHandState`: This message can be used to activate the figner breaks and inflate/deflate individual tactors or tactor groups
+These are the 8 topics and their associated message types:
+- `/haptx/rh/brake_state` and `/haptx/lh/brake_state`
+    - __Message Type:__ `FingerBrakeState`
+    - Can be used to activate/deactivate the finger brakes of the HaptX Glove
+- `/haptx/rh/tactor_state` and `/haptx/lh/tactor_state`
+    - __Message Type:__ `TactorState`
+    - Can be used to inflate/deflate individual tactors
+- `/haptx/rh/tactor_group_state` and `/haptx/lh/tactor_group_state`
+    - __Message Type:__ `TactorGroupState`
+    - Can be used to inflate/deflate predefined groups of tactors
+- `/haptx/rh/hand_state` and `/haptx/lh/hand_state`
+    - __Message Type:__ `FullHandState`
+    - Can be used to activate the figner brakes and inflate/deflate individual tactors or tactor groups
 
 <br>
 
-## haptx_interfaces/FingerBreakState
+## haptx_interfaces/FingerBrakeState
 ```
 string[] name
 bool[] activated
 ```
 
 
-The FingerBreakState message contains of:
-- A list of strings called `name` which specifies the names of the finger breaks you want to activate/deactivate
+The FingerBrakeState message contains of:
+- A list of strings called `name` which specifies the names of the finger brake you want to activate/deactivate
     - Options:
         - Right Hand:
             - Thumb: `'rh_th'`
@@ -33,7 +41,7 @@ The FingerBreakState message contains of:
             - Ring Finger: `'lh_rf'`
             - Little Finger: `'lh_lf'`
 
-- A list of booleans called `activated` which specifies the state of each finger break specified in the `name` list
+- A list of booleans called `activated` which specifies the state of each finger brake specified in the `name` list
     - Options:
         - `True`
         - `False`
@@ -41,10 +49,10 @@ The FingerBreakState message contains of:
 
 __Example Usage:__
 
-This message will activate the finger breaks on the Right Hand First Finger and Right Hand Middle Finger, and deactivate the finger break on the Left Hand Thumb
+When published to the `haptx/rh/brake_state` topic, this message will activate the finger brake on the Right Hand First Finger and Right Hand Middle Finger, and deactivate the finger brake on the Right Hand Little Finger
 ```
-msg = FingerBreakState()
-msg.name = ['rh_ff', 'rh_mf', 'lh_th']
+msg = FingerBrakeState()
+msg.name = ['rh_ff', 'rh_mf', 'rh_lf']
 msg.activated = [True, True, False]
 ```
 
@@ -70,7 +78,7 @@ The TactorState message contains of:
 
 __Example Usage:__
 
-This message will inflate tactor 1011 to 0.7\*MAX_INFLATION, tactor 1023 to 1.0\*MAX_INFLATION, etc.
+When published to the `haptx/rh/tactor_state` topic, this message will inflate tactor 1011 to 0.7\*MAX_INFLATION, tactor 1023 to 1.0\*MAX_INFLATION, etc.
 ```
 msg = TactorState()
 msg.tactor_id = [1011, 1023, 1038, 1237]
@@ -110,10 +118,10 @@ The TactorGroupState message contains of:
 
 __Example Usage:__
 
-This message will inflate the tactors on the Right Hand First Finger to 0.4\*MAX_INFLATION, the tactors on the Right Hand Middle Finger to 0.67\*MAX_INFLATION, etc.
+When published to the `haptx/lh/tactor_group_state` topic, this message will inflate the tactors on the Left Hand Thumb to 0.4\*MAX_INFLATION, the tactors on the Left Hand Middle Finger to 0.67\*MAX_INFLATION, etc.
 ```
 msg = TactorGroupState()
-msg.tactor_group = ['rh_ff', 'rh_mf', 'lh_th']
+msg.tactor_group = ['lh_th', 'lh_mf', 'lh_rf']
 msg.inflation = [0.4, 0.67, 0.0]
 ```
 
@@ -121,33 +129,33 @@ msg.inflation = [0.4, 0.67, 0.0]
 
 ## haptx_interfaces/FullHandState
 ```
-FingerBreakState breaks
+FingerBrakeState brakes
 TactorState tactors
 TactorGroupState tactor_groups
 ```
 
 
 The TactorGroupState message contains of:
-- A FingerBreakState message called `breaks` which can be used to activate/deactivate the finger breaks
+- A FingerBrakeState message called `brakes` which can be used to activate/deactivate the finger brakes
 - A TactorState message called `tactors` which can be used to inflate/deflate individual tactors
 - A TactorGroupState message called `tactor_groups` which can be used to inflate/deflate tactor groups
 
 
-Any of these fields are optional. For example, if you only specify `tactor_groups`, no finger breaks will be activated/deactivated.
+Any of these fields are optional. For example, if you only specify `tactor_groups`, no finger brakes will be activated/deactivated.
 
 If the `tactors` field specifies values that are contradicted by values in the `tactor_groups` field, the values in the `tactor_groups` field will take precedence.
 
 
 __Example Usage:__
 
-This message will:
-- Activate the finger breaks on the Right Hand First Finger and Right Hand Middle Finger, and deactivate the finger break on the Left Hand Thumb
-- Inflate the tactors on the Left Hand Ring Finger to 0.81\*MAX_INFLATION and the tactors on the Left Hand Little Finger to 0.12\*MAX_INFLATION
+When published to the `haptx/rh/hand_state` topic, this message will:
+- Activate the finger brakes on the Right Hand First Finger and Right Hand Middle Finger, and deactivate the finger brakes on the Right Hand Little Finger
+- Inflate the tactors on the Right Hand Ring Finger to 0.81\*MAX_INFLATION and the tactors on the Right Hand Little Finger to 0.12\*MAX_INFLATION
 ```
 msg = FullHandState()
-msg.breaks.name = ['rh_ff', 'rh_mf', 'lh_th']
-msg.breaks.activated = [True, True, False]
+msg.brakes.name = ['rh_ff', 'rh_mf', 'rh_lf']
+msg.brakes.activated = [True, True, False]
 
-msg.tactor_groups.tactor_group = ['lh_rf', 'lh_lf']
+msg.tactor_groups.tactor_group = ['rh_rf', 'rh_lf']
 msg.tactor_groups.inflation = [0.81, 0.12]
 ```
