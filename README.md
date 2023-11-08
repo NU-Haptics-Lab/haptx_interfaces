@@ -68,7 +68,7 @@ float64[] inflation
 The TactorState message contains of:
 - A list of tactor IDs called `tactor_id` which specifies the IDs of the tactors you want to inflate/deflate
     - Options:
-        - [Insert Image Here]
+        - ![tactors](./images/tactors.png)
 
 - A list of floats called `inlfation` which specifies how much to inflate each tactor specified in the `tactor_id` list
     - The inflation value should be a float in the range of [0,1]
@@ -103,12 +103,20 @@ The TactorGroupState message contains of:
             - Middle Finger: `'rh_mf'`
             - Ring Finger: `'rh_rf'`
             - Little Finger: `'rh_lf'`
+            - Upper Palm: `'rh_palm_top'`
+            - Lower Palm (side closer to thumb): `'rh_palm_th'`
+            - Lower Palm (side closer to little finger): `'rh_palm_lf'`
+            - Full Palm: `'rh_palm_full'`
         - Left Hand:
             - Thumb: `'lh_th'`
             - First Finger: `'lh_ff'`
             - Middle Finger: `'lh_mf'`
             - Ring Finger: `'lh_rf'`
             - Little Finger: `'lh_lf'`
+            - Upper Palm: `'lh_palm_top'`
+            - Lower Palm (side closer to thumb): `'lh_palm_th'`
+            - Lower Palm (side closer to little finger): `'lh_palm_lf'`
+            - Full Palm: `'lh_palm_full'`
 
 - A list of floats called `inflation` which specifies how much to inflate each tactor group specified in the `tactor_group` list
     - The inflation value should be a float in the range of [0,1]
