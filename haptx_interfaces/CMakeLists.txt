@@ -17,8 +17,11 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/HaptxState.msg"
   "msg/TactorGroupState.msg"
   "msg/TactorState.msg"
+  "srv/SetProfile.srv"
   DEPENDENCIES sensor_msgs tf2_msgs
 )
+
+ament_export_dependencies(rosidl_default_runtime)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
