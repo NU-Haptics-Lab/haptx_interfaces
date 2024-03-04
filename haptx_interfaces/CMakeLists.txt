@@ -8,6 +8,7 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(std_srvs REQUIRED)
 find_package(tf2_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
@@ -18,7 +19,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/TactorGroupState.msg"
   "msg/TactorState.msg"
   "srv/SetProfile.srv"
-  DEPENDENCIES sensor_msgs tf2_msgs
+  DEPENDENCIES sensor_msgs tf2_msgs std_srvs
 )
 
 ament_export_dependencies(rosidl_default_runtime)
