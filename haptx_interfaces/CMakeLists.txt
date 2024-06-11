@@ -13,6 +13,7 @@ find_package(tf2_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/BiotacNormalized.msg"
   "msg/FingerBrakeState.msg"
   "msg/FullHandState.msg"
   "msg/HaptxState.msg"
