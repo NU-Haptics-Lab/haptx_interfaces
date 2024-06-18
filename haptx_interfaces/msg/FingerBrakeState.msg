@@ -11,3 +11,4 @@
 
 string[] name
 bool[] activated
+std_msgs/Header header
