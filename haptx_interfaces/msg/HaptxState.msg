@@ -1,2 +1,6 @@
 sensor_msgs/JointState joint_angles
-tf2_msgs/TFMessage transforms
+geometry_msgs/TransformStamped th
+geometry_msgs/TransformStamped ff
+geometry_msgs/TransformStamped mf
+geometry_msgs/TransformStamped rf
+geometry_msgs/TransformStamped lf
