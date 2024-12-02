@@ -1,4 +1,3 @@
-sensor_msgs/JointState joint_angles
 geometry_msgs/TransformStamped th
 geometry_msgs/TransformStamped ff
 geometry_msgs/TransformStamped mf
